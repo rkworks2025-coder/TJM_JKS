@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>JKS Field</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-top">
+      <div class="logo">JKS <span class="badge" id="area-badge">FIELD</span></div>
+      <div class="update-wrapper">
+        <button class="update-btn" id="update-btn" onclick="triggerUpdate()">
+          ↻ データ更新
+        </button>
+        <div id="last-update-time"></div>
+      </div>
+    </div>
+    
+    <div class="area-tabs">
+      <button class="tab-btn" data-area="tama" onclick="switchArea('tama')">多摩</button>
+      <button class="tab-btn" data-area="kanagawa" onclick="switchArea('kanagawa')">神奈川</button>
+    </div>
+    
+    <div class="mode-tabs" style="margin-top: 8px;">
+      <button class="mode-btn" data-mode="normal" onclick="switchMode('normal')">Normal Mode</button>
+      <button class="mode-btn" data-mode="cluster" onclick="switchMode('cluster')">Cluster Mode</button>
+    </div>
+  </div>
+
+  <div class="scan-area">
+    <button id="scan-btn" type="button" onclick="startScan()">エリアを選択</button>
+    <div id="status-msg">GPS情報を取得して検索します</div>
+  </div>
+
+  <div id="result-list" class="list-container">
+    <div id="missing-alert-box" class="missing-alert"></div>
+    <div class="empty-state">
+      エリアを選んで<br>ボタンを押してください
+    </div>
+  </div>
+
+  <div id="toast">更新を開始しました</div>
+
+  <script src="app.js"></script>
+</body>
+</html>

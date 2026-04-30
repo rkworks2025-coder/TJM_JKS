@@ -1,0 +1,121 @@
+/* Reset & Base */
+body {
+  background-color: #000000;
+  color: #e0e0e0;
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  margin: 0; padding: 0;
+  padding-bottom: 60px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.header {
+  background: rgba(20, 20, 20, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 12px 15px;
+  position: sticky; top: 0; z-index: 100;
+  border-bottom: 1px solid #333;
+}
+.header-top {
+  display: flex; justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.logo { font-size: 20px; font-weight: 900; color: #fff; letter-spacing: -0.5px; padding-top: 6px; }
+.badge { background: #0066cc; color: #fff; font-size: 10px; padding: 3px 6px; border-radius: 4px; vertical-align: middle; margin-left: 5px; }
+
+/* Update Button */
+.update-wrapper {
+  display: flex; flex-direction: column; align-items: flex-end;
+}
+.update-btn {
+  background: #e63946; color: #fff; border: none; border-radius: 6px;
+  padding: 8px 16px; font-size: 13px; font-weight: bold; cursor: pointer;
+  display: flex; align-items: center; gap: 5px; transition: background 0.3s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+.update-btn:active { opacity: 0.8; transform: translateY(1px); }
+.update-btn:disabled { background: #555; color: #aaa; cursor: wait; transform: none; box-shadow: none; }
+#last-update-time { font-size: 12px; color: #aaa; margin-top: 5px; font-weight: bold; height: 14px; }
+
+/* Tabs (Area & Mode) */
+.area-tabs, .mode-tabs {
+  display: flex; gap: 10px; background: #111; padding: 4px; border-radius: 8px;
+}
+.tab-btn, .mode-btn {
+  flex: 1; border: none; background: transparent; color: #666; padding: 8px 0;
+  font-size: 14px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: all 0.2s;
+}
+.tab-btn.active, .mode-btn.active {
+  background: #333; color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+.tab-btn.active[data-area="tama"] { border-bottom: 2px solid #00bfff; color: #00bfff; }
+.tab-btn.active[data-area="kanagawa"] { border-bottom: 2px solid #ff9900; color: #ff9900; }
+.mode-btn.active[data-mode="normal"] { border-bottom: 2px solid #a3a3a3; color: #fff; }
+.mode-btn.active[data-mode="cluster"] { border-bottom: 2px solid #9933ff; color: #d9b3ff; }
+
+/* Scan Area */
+.scan-area { padding: 20px; text-align: center; background: #050505; border-bottom: 1px solid #222; }
+#scan-btn {
+  background: linear-gradient(135deg, #444, #666); color: white; border: none;
+  padding: 14px 40px; border-radius: 50px; font-size: 18px; font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0,0,0, 0.4); width: 100%; max-width: 300px;
+  cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform 0.1s, background 0.3s;
+}
+#scan-btn.ready-tama { background: linear-gradient(135deg, #00bfff, #0077ff); box-shadow: 0 4px 15px rgba(0, 119, 255, 0.4); }
+#scan-btn.ready-kanagawa { background: linear-gradient(135deg, #ff9900, #ff5500); box-shadow: 0 4px 15px rgba(255, 153, 0, 0.4); }
+#scan-btn:active { transform: scale(0.96); }
+#status-msg { margin-top: 10px; font-size: 12px; color: #666; height: 1.2em; }
+
+/* List Area */
+.list-container { padding: 15px; max-width: 600px; margin: 0 auto; }
+.empty-state { text-align: center; color: #444; margin-top: 50px; font-size: 14px; }
+.missing-alert {
+  background: #331111; border: 1px solid #e63946; color: #ffcccc; padding: 10px;
+  margin-bottom: 15px; border-radius: 8px; font-size: 12px; display: none; line-height: 1.5;
+}
+.missing-title { font-weight: bold; color: #ff6666; margin-bottom: 4px; }
+
+/* Card Design */
+.card {
+  background: #1a1a1a; border: 1px solid #333; border-radius: 12px; margin-bottom: 15px;
+  overflow: hidden; animation: fadeIn 0.3s ease-out; position: relative;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.card-header {
+  background: #252525; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333;
+}
+.dist-badge { font-weight: bold; font-size: 16px; color: #fff; display: flex; align-items: center; gap: 5px; }
+.dist-unit { font-size: 12px; color: #888; font-weight: normal; }
+.duration-badge { font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 3px; margin-left: 10px; }
+.time-unit { font-size: 12px; color: #888; font-weight: normal; }
+.urgent-badge { background: #e63946; color: #fff; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 4px; margin-left: 8px; display: none; }
+.urgent-active { display: inline-block; animation: pulse 2s infinite; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
+.nav-btn { background: transparent; color: #00bfff; border: 1px solid #00bfff; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; text-decoration: none; }
+.nav-btn:active { background: rgba(0, 191, 255, 0.2); }
+
+.card-body { padding: 15px; }
+.station-name { font-size: 15px; font-weight: bold; color: #fff; margin-bottom: 6px; line-height: 1.4; }
+.car-info { font-size: 15px; color: #aaa; display: flex; gap: 10px; margin-bottom: 12px; align-items: baseline; }
+.plate { color: #ddd; font-weight: bold; }
+.time-info { font-size: 12px; color: #888; background: #111; padding: 8px; border-radius: 6px; display: flex; align-items: center; gap: 6px; }
+.time-val { color: #fff; font-weight: bold; font-size: 14px; }
+.error-text { color: #ff3399; font-weight: bold; }
+
+/* Cluster Badge */
+.cluster-badge {
+  background: #9933ff; color: #fff; font-size: 12px; font-weight: bold;
+  padding: 4px 8px; border-radius: 4px; display: inline-block; margin-bottom: 8px;
+  box-shadow: 0 2px 4px rgba(153, 51, 255, 0.3);
+}
+.cluster-badge.single { background: #444; box-shadow: none; color: #aaa; }
+.cluster-stats { font-size: 11px; color: #ccc; margin-left: 6px; font-weight: normal; }
+
+#toast {
+  position: fixed; top: 70px; left: 50%; transform: translateX(-50%);
+  background: rgba(0, 153, 255, 0.9); color: white; padding: 10px 20px; border-radius: 30px;
+  font-size: 12px; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 200; white-space: nowrap;
+}
