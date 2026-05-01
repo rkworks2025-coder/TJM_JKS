@@ -1,13 +1,6 @@
-const GAS_API_URL = "https://script.google.com/macros/s/AKfycbxAZpJaIANOuIS6d90E9Xt84JZauMmlRlnnBcfwoVJk2UkC9CTFQSRHtFPNSOkuTuwhOg/exec";
+const GAS_API_URL = "https://script.google.com/macros/s/AKfycbywQoNFA2x7qn8cMelt_5OVPiNumBYqPbTNnK3nzXWv59q0FmP2Mt8qmVxT5Zk6wPEr/exec";
 
-// メンテナンス性を考慮したエリア設定マップ[cite: 1]
-const AREA_MAP = {
-  "yamato": { label: "大和", badge: "YMTO", btnClass: "ready-yamato" },
-  "ebina": { label: "海老名", badge: "EBNA", btnClass: "ready-ebina" },
-  "kanagawa": { label: "神奈川", badge: "KNGW", btnClass: "ready-kanagawa" }
-};
-
-let currentArea = 'yamato'; 
+let currentArea = 'tama'; 
 let currentMode = 'normal';
 let pollInterval = null;
 let updateClickTime = 0;
@@ -19,8 +12,7 @@ function generateRequestId() {
 
 window.onload = function() {
   const savedArea = localStorage.getItem('jks_area_mode');
-  // 保存されたエリアがMAPに存在するか確認[cite: 1]
-  if (savedArea && AREA_MAP[savedArea]) {
+  if (savedArea && (savedArea === 'tama' || savedArea === 'yamato' || savedArea === 'ebina' || savedArea === 'kanagawa')) {
     switchArea(savedArea);
   } else {
     switchArea('yamato'); 
@@ -35,10 +27,7 @@ window.onload = function() {
 };
 
 function switchArea(area) {
-  if (!AREA_MAP[area]) return;
   currentArea = area;
-  const config = AREA_MAP[area];
-
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.classList.remove('active');
     if (btn.dataset.area === area) btn.classList.add('active');
@@ -46,10 +35,25 @@ function switchArea(area) {
 
   const btn = document.getElementById('scan-btn');
   btn.className = ''; 
-  btn.classList.add(config.btnClass);
-  btn.textContent = `📡 ${config.label}をスキャン`;
-
-  document.getElementById('area-badge').textContent = config.badge;
+  
+  // 既存のtama分岐を維持しつつ拡張[cite: 1]
+  if (area === 'tama') {
+    btn.classList.add('ready-tama');
+    btn.textContent = "📡 多摩をスキャン";
+    document.getElementById('area-badge').textContent = 'TAMA';
+  } else if (area === 'yamato') {
+    btn.classList.add('ready-yamato');
+    btn.textContent = "📡 大和をスキャン";
+    document.getElementById('area-badge').textContent = 'YMTO';
+  } else if (area === 'ebina') {
+    btn.classList.add('ready-ebina');
+    btn.textContent = "📡 海老名をスキャン";
+    document.getElementById('area-badge').textContent = 'EBNA';
+  } else {
+    btn.classList.add('ready-kanagawa');
+    btn.textContent = "📡 神奈川をスキャン";
+    document.getElementById('area-badge').textContent = 'KNGW';
+  }
   localStorage.setItem('jks_area_mode', area);
 }
 
@@ -66,7 +70,12 @@ function triggerUpdate() {
   const btn = document.getElementById('update-btn');
   const timeLabel = document.getElementById('last-update-time');
   
-  const areaLabel = AREA_MAP[currentArea] ? `${AREA_MAP[currentArea].label}エリア` : "指定エリア";
+  // ラベル表示ロジック[cite: 1]
+  let areaLabel = "神奈川エリア";
+  if (currentArea === 'tama') areaLabel = "多摩エリア";
+  else if (currentArea === 'yamato') areaLabel = "大和エリア";
+  else if (currentArea === 'ebina') areaLabel = "海老名エリア";
+
   if (!confirm(`【${areaLabel}】のデータ更新を開始しますか？`)) return;
 
   btn.disabled = true;
@@ -281,6 +290,7 @@ function renderResults(data, originalText) {
       const checked = rep.stationChecked || 0;
       const remaining = total - checked;
 
+      // ★ 厳格な完遂表示ロジック ★
       let shouldShow = false;
       
       if (remaining === 1 && activeCount >= 1) {
@@ -290,7 +300,11 @@ function renderResults(data, originalText) {
       } else if (remaining === 3 && activeCount >= 3) {
         shouldShow = true;
       } else if (total >= 4 && remaining >= 4 && activeCount >= 2) {
+        // マンモス特例: 全4台以上、残4台以上で、2台以上空いていれば表示
         shouldShow = true;
+        
+        // ★追加: 1台残し（端数）の完全禁止フィルター
+        // 作業後に「残り1台」になってしまう場合は、特例であっても強制的に非表示にする
         if ((remaining - activeCount) === 1) {
           shouldShow = false;
         }
@@ -317,6 +331,7 @@ function renderResults(data, originalText) {
     msg.textContent = `検索完了: 完遂可能 ${displayItems.length} ステーション`;
 
   } else {
+    // Normal Mode
     displayItems = data.items.slice(0, 8);
     msg.textContent = `検索完了: ${displayItems.length}件を表示 (Normal)`;
   }
