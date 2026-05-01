@@ -50,8 +50,7 @@ body {
   background: #333; color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 
-/* 既存の多摩を維持しつつ新エリアを追記[cite: 3] */
-.tab-btn.active[data-area="tama"] { border-bottom: 2px solid #00bfff; color: #00bfff; }
+/* 新エリア別のテーマカラー[cite: 3] */
 .tab-btn.active[data-area="yamato"] { border-bottom: 2px solid #00ffcc; color: #00ffcc; }
 .tab-btn.active[data-area="ebina"] { border-bottom: 2px solid #00bfff; color: #00bfff; }
 .tab-btn.active[data-area="kanagawa"] { border-bottom: 2px solid #ff9900; color: #ff9900; }
@@ -68,8 +67,7 @@ body {
   cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform 0.1s, background 0.3s;
 }
 
-/* 既存・新エリア別のボタン色設定[cite: 3] */
-#scan-btn.ready-tama { background: linear-gradient(135deg, #00bfff, #0077ff); box-shadow: 0 4px 15px rgba(0, 119, 255, 0.4); }
+/* ボタン別グラデーション設定[cite: 3] */
 #scan-btn.ready-yamato { background: linear-gradient(135deg, #00ccaa, #008877); box-shadow: 0 4px 15px rgba(0, 204, 170, 0.4); }
 #scan-btn.ready-ebina { background: linear-gradient(135deg, #00bfff, #0077ff); box-shadow: 0 4px 15px rgba(0, 119, 255, 0.4); }
 #scan-btn.ready-kanagawa { background: linear-gradient(135deg, #ff9900, #ff5500); box-shadow: 0 4px 15px rgba(255, 153, 0, 0.4); }
