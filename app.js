@@ -338,7 +338,7 @@ function renderResults(data, originalText) {
 
   displayItems.forEach(item => {
     const urgentClass = item.isUrgent ? "urgent-active" : "";
-    const mapUrl = "http://maps.google.com/maps?q=" + item.lat + "," + item.lng;
+    const mapUrl = "comgooglemaps://?daddr=" + item.lat + "," + item.lng + "&directionsmode=driving";
     
     let distDisplay = item.distance;
     let unitDisplay = "m";
