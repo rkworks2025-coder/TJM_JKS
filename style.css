@@ -54,6 +54,7 @@ body {
 .tab-btn.active[data-area="tama"] { border-bottom: 2px solid #00bfff; color: #00bfff; }
 .tab-btn.active[data-area="yamato"] { border-bottom: 2px solid #00ffcc; color: #00ffcc; }
 .tab-btn.active[data-area="ebina"] { border-bottom: 2px solid #00bfff; color: #00bfff; }
+.tab-btn.active[data-area="nakahara"] { border-bottom: 2px solid #ff66cc; color: #ff66cc; }
 .tab-btn.active[data-area="kanagawa"] { border-bottom: 2px solid #ff9900; color: #ff9900; }
 
 .mode-btn.active[data-mode="normal"] { border-bottom: 2px solid #a3a3a3; color: #fff; }
@@ -72,6 +73,7 @@ body {
 #scan-btn.ready-tama { background: linear-gradient(135deg, #00bfff, #0077ff); box-shadow: 0 4px 15px rgba(0, 119, 255, 0.4); }
 #scan-btn.ready-yamato { background: linear-gradient(135deg, #00ccaa, #008877); box-shadow: 0 4px 15px rgba(0, 204, 170, 0.4); }
 #scan-btn.ready-ebina { background: linear-gradient(135deg, #00bfff, #0077ff); box-shadow: 0 4px 15px rgba(0, 119, 255, 0.4); }
+#scan-btn.ready-nakahara { background: linear-gradient(135deg, #ff66cc, #cc0077); box-shadow: 0 4px 15px rgba(255, 102, 204, 0.4); }
 #scan-btn.ready-kanagawa { background: linear-gradient(135deg, #ff9900, #ff5500); box-shadow: 0 4px 15px rgba(255, 153, 0, 0.4); }
 
 #scan-btn:active { transform: scale(0.96); }
