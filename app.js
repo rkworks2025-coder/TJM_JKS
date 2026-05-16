@@ -12,7 +12,7 @@ function generateRequestId() {
 
 window.onload = function() {
   const savedArea = localStorage.getItem('jks_area_mode');
-  if (savedArea && (savedArea === 'tama' || savedArea === 'yamato' || savedArea === 'ebina' || savedArea === 'kanagawa')) {
+  if (savedArea && (savedArea === 'tama' || savedArea === 'yamato' || savedArea === 'ebina' || savedArea === 'kanagawa' || savedArea === 'nakahara')) {
     switchArea(savedArea);
   } else {
     switchArea('yamato'); 
@@ -49,6 +49,10 @@ function switchArea(area) {
     btn.classList.add('ready-ebina');
     btn.textContent = "📡 海老名をスキャン";
     document.getElementById('area-badge').textContent = 'EBNA';
+  } else if (area === 'nakahara') {
+    btn.classList.add('ready-nakahara');
+    btn.textContent = "📡 中原区をスキャン";
+    document.getElementById('area-badge').textContent = 'NKHR';
   } else {
     btn.classList.add('ready-kanagawa');
     btn.textContent = "📡 神奈川をスキャン";
@@ -75,6 +79,7 @@ function triggerUpdate() {
   if (currentArea === 'tama') areaLabel = "多摩エリア";
   else if (currentArea === 'yamato') areaLabel = "大和エリア";
   else if (currentArea === 'ebina') areaLabel = "海老名エリア";
+  else if (currentArea === 'nakahara') areaLabel = "中原区エリア";
 
   if (!confirm(`【${areaLabel}】のデータ更新を開始しますか？`)) return;
 
